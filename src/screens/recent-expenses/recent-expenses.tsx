@@ -13,7 +13,7 @@ export function RecentExpensesScreen() {
   const navigation =
     useNavigation<NavigationProp<BottomTabsParams, "RecentExpenses">>();
 
-  const { handleHeaderButtonPress } = useRecentExpensesScreen();
+  const { handleHeaderButtonPress, recentExpenses } = useRecentExpensesScreen();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -28,5 +28,11 @@ export function RecentExpensesScreen() {
     });
   }, [navigation]);
 
-  return <ExpensesOutput expensesPeriod="Last 7 days" />;
+  return (
+    <ExpensesOutput
+      expensesPeriod="Last 7 days"
+      expenses={recentExpenses}
+      text="No expenses registered for the past 7 days."
+    />
+  );
 }

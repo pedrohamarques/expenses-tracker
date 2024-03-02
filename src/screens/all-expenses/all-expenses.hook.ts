@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { ExpensesContext } from "@store/expenses.context";
 
 import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import type { CompositeNavigationProp } from "@react-navigation/native";
@@ -14,11 +16,14 @@ export type ManageExpenseNavigationProp = CompositeNavigationProp<
 export function useAllExpensesScreen() {
   const navigation = useNavigation<ManageExpenseNavigationProp>();
 
+  const { expenses } = useContext(ExpensesContext);
+
   function handleHeaderButtonPress() {
     navigation.navigate("ManageExpense", { expenseId: null });
   }
 
   return {
     handleHeaderButtonPress,
+    expenses,
   };
 }

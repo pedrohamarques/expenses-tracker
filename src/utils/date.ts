@@ -29,3 +29,7 @@ function formatDate(date: string) {
 export function getFormattedDate(date: Date) {
   return `${formatDate(String(date.getDate()))} / ${getMonthName(date.getMonth())} / ${date.getFullYear()}`;
 }
+
+export function getDayMinusDays(date: Date, days: number) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() - days);
+}

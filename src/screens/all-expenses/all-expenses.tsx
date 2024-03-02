@@ -13,7 +13,7 @@ export function AllExpensesScreen() {
   const navigation =
     useNavigation<NavigationProp<BottomTabsParams, "AllExpenses">>();
 
-  const { handleHeaderButtonPress } = useAllExpensesScreen();
+  const { handleHeaderButtonPress, expenses } = useAllExpensesScreen();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -27,5 +27,11 @@ export function AllExpensesScreen() {
       ),
     });
   }, [navigation]);
-  return <ExpensesOutput expensesPeriod="Total" />;
+  return (
+    <ExpensesOutput
+      expensesPeriod="Total"
+      expenses={expenses}
+      text="No expenses registered."
+    />
+  );
 }
