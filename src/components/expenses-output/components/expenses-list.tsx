@@ -18,6 +18,7 @@ export function ExpensesList({ expenses }: ExpenseListProps) {
           description={item.description}
           date={item.date}
           amount={item.amount}
+          id={item.id}
         />
       )}
       keyExtractor={(item) => item.id}

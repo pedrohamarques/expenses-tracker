@@ -15,7 +15,7 @@ export function useRecentExpensesScreen() {
   const navigation = useNavigation<ManageExpenseNavigationProp>();
 
   function handleHeaderButtonPress() {
-    navigation.navigate("ManageExpense");
+    navigation.navigate("ManageExpense", { expenseId: null });
   }
 
   return {

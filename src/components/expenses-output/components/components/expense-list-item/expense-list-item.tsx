@@ -6,17 +6,13 @@ import { GlobalStyles } from "@constants/styles";
 import { getFormattedDate } from "@utils/date";
 import { useExpenseListItem } from "./expense-list-item.hook";
 
-type ExpenseListItemProps = Pick<
-  ExpensesProps,
-  "description" | "amount" | "date"
->;
-
 export function ExpenseListItem({
   description,
   amount,
   date,
-}: ExpenseListItemProps) {
-  const { expensePressHandler } = useExpenseListItem();
+  id,
+}: ExpensesProps) {
+  const { expensePressHandler } = useExpenseListItem(id);
   return (
     <Pressable
       onPress={expensePressHandler}
