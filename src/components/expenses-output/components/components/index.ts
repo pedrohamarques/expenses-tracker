@@ -1,1 +1,1 @@
-export { ExpenseListItem } from "./expense-list-item";
+export { ExpenseListItem } from "./expense-list-item/expense-list-item";
