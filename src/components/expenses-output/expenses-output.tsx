@@ -5,7 +5,7 @@ import { GlobalStyles } from "@constants/styles";
 
 import { ExpensesSummary, ExpensesList } from "./components";
 
-import { DUMMY_EXPENSES } from "./dummy-data";
+import { DUMMY_EXPENSES } from "@constants/dummy-data";
 import type { ExpensesProps } from "./types";
 
 export type ExpensesOutputProps = {
