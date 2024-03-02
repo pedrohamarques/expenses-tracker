@@ -8,7 +8,8 @@
       "@routes/*": ["src/routes/*"],
       "@constants/*": ["src/constants/*"],
       "@components/*": ["src/components/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@store/*": ["src/store/*"]
     }
   }
 }
