@@ -1,1 +1,1 @@
-export { RecentExpensesScreen as default } from "./recent-expense";
+export { RecentExpensesScreen as default } from "./recent-expenses";

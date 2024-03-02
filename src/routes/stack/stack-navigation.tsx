@@ -5,7 +5,7 @@ import ManageExpenseScreen from "@screens/manage-expense";
 
 import { BottomNavigation } from "../bottom/bottom-navigation";
 
-type StackParams = {
+export type StackParams = {
   ManageExpense: undefined;
   ExpensesOverview: undefined;
 };
