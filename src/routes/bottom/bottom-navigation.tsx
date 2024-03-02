@@ -40,7 +40,7 @@ export function BottomNavigation() {
         component={AllExpensesScreen}
         options={{
           title: "All Expenses",
-          tabBarLabel: "Recent",
+          tabBarLabel: "All",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="calendar" size={size} color={color} />
           ),
