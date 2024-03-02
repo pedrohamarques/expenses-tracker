@@ -7,7 +7,7 @@ import ExpensesContextProvider from "src/store/expenses.context";
 export default function App() {
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <ExpensesContextProvider>
         <NavigationContainer>
           <StackNavigation />
