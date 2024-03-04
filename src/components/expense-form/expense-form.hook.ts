@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import type { ExpenseDataProps } from "@typings/data";
+
 type InputFieldProps = {
   value: string;
   isValid: boolean;
@@ -9,12 +11,6 @@ type InputValuesProps = {
   amount: InputFieldProps;
   date: InputFieldProps;
   description: InputFieldProps;
-};
-
-export type ExpenseDataProps = {
-  amount: number;
-  date: Date;
-  description: string;
 };
 
 type UseExpenseFormProps = {

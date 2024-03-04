@@ -1,4 +1,4 @@
-import { ExpensesProps } from "@components/expenses-output/types";
+import { ExpensesProps } from "@typings/data";
 
 export type ExpenseContextProps = {
   expenses: ExpensesProps[];

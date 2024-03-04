@@ -5,7 +5,7 @@ import { GlobalStyles } from "@constants/styles";
 
 import { ExpensesSummary, ExpensesList } from "./components";
 
-import type { ExpensesProps } from "./types";
+import type { ExpensesProps } from "@typings/data";
 
 export type ExpensesOutputProps = {
   expenses: ExpensesProps[];

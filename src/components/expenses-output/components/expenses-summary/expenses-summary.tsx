@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import type { ExpensesProps } from "@components/expenses-output/types";
+import type { ExpensesProps } from "@typings/data";
 import { useExpensesSummary } from "./expenses-summary.hook";
 
 import { GlobalStyles } from "@constants/styles";

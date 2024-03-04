@@ -3,7 +3,7 @@ import { FlatList } from "react-native";
 
 import { ExpenseListItem } from "./components";
 
-import type { ExpensesProps } from "../types";
+import type { ExpensesProps } from "@typings/data";
 
 type ExpenseListProps = {
   expenses: ExpensesProps[];

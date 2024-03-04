@@ -1,9 +1,12 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-import { ExpensesProps } from "@components/expenses-output/types";
 import { GlobalStyles } from "@constants/styles";
+
 import { getFormattedDate } from "@utils/date";
+
+import type { ExpensesProps } from "@typings/data";
+
 import { useExpenseListItem } from "./expense-list-item.hook";
 
 export function ExpenseListItem({

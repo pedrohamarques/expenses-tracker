@@ -1,4 +1,4 @@
-import type { ExpensesProps } from "@components/expenses-output/types";
+import type { ExpensesProps } from "@typings/data";
 
 export function useExpensesSummary(expenses: ExpensesProps[]) {
   const expensesSum = expenses.reduce((sum, expense) => {
