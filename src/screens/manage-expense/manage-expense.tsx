@@ -4,7 +4,6 @@ import { useNavigation } from "@react-navigation/native";
 
 import { IconButton } from "@components/ui";
 import { GlobalStyles } from "@constants/styles";
-import { Button } from "@components/ui/button";
 import ExpenseForm from "@components/expense-form";
 
 import { useManageExpenseScreen } from "./manage-expense.hook";
@@ -27,15 +26,12 @@ export function ManageExpenseScreen() {
 
   return (
     <View style={styles.container}>
-      <ExpenseForm />
-      <View style={styles.buttonsContainer}>
-        <Button style={styles.button} mode="flat" onPress={cancelHandler}>
-          Cancel
-        </Button>
-        <Button style={styles.button} onPress={confirmHandler}>
-          {isEditing ? "Update" : "Add"}
-        </Button>
-      </View>
+      <ExpenseForm
+        isEditing={isEditing}
+        onCancel={cancelHandler}
+        onSubmit={confirmHandler}
+      />
+
       {isEditing ? (
         <View style={styles.deleteContainer}>
           <IconButton
@@ -62,14 +58,5 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
     borderTopColor: GlobalStyles.colors.primary200,
     alignItems: "center",
-  },
-  buttonsContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  button: {
-    minWidth: 120,
-    marginHorizontal: 8,
   },
 });

@@ -5,6 +5,7 @@ import { ExpensesContext } from "@store/expenses.context";
 
 import type { NavigationProp } from "@react-navigation/native";
 import type { StackParams } from "@routes/stack/stack-navigation";
+import type { ExpenseDataProps } from "./types";
 
 export function useManageExpenseScreen() {
   const route = useRoute<RouteProp<StackParams, "ManageExpense">>();
@@ -16,12 +17,14 @@ export function useManageExpenseScreen() {
 
   const { expenseId } = route.params;
 
-  const expense = expenses.filter((expense) => expense.id === expenseId);
+  const expense = expenses.find((expense) => expense.id === expenseId);
 
   const isEditing = !!route.params.expenseId;
 
   function deleteExpenseHandler() {
-    deleteExpense(expense[0]);
+    if (expense) {
+      deleteExpense(expense);
+    }
     navigation.goBack();
   }
 
@@ -29,21 +32,11 @@ export function useManageExpenseScreen() {
     navigation.goBack();
   }
 
-  function confirmHandler() {
+  function confirmHandler(expenseData: ExpenseDataProps) {
     if (isEditing && expenseId) {
-      updateExpense({
-        amount: 29.99,
-        date: new Date("2023-08-88"),
-        description: "TestUpdate",
-        id: expenseId,
-      });
+      updateExpense({ ...expenseData, id: expenseId });
     } else {
-      addExpense({
-        amount: 19.99,
-        date: new Date("2023-05-05"),
-        description: "Test",
-        id: String(Math.random()),
-      });
+      addExpense({ ...expenseData, id: "" });
     }
     navigation.goBack();
   }
