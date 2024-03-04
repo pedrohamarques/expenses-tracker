@@ -16,12 +16,6 @@ export function useManageExpenseScreen() {
 
   const { expenseId } = route.params;
 
-  let checkedExpenseId = "random";
-
-  if (expenseId) {
-    checkedExpenseId = expenseId;
-  }
-
   const expense = expenses.filter((expense) => expense.id === expenseId);
 
   const isEditing = !!route.params.expenseId;
@@ -36,12 +30,12 @@ export function useManageExpenseScreen() {
   }
 
   function confirmHandler() {
-    if (isEditing) {
+    if (isEditing && expenseId) {
       updateExpense({
         amount: 29.99,
         date: new Date("2023-08-88"),
         description: "TestUpdate",
-        id: checkedExpenseId,
+        id: expenseId,
       });
     } else {
       addExpense({

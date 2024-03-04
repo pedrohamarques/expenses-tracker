@@ -1,12 +1,16 @@
 import React, { useLayoutEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
-import { useManageExpenseScreen } from "./manage-expense.hook";
-import { StackParams } from "@routes/stack/stack-navigation";
 import { IconButton } from "@components/ui";
 import { GlobalStyles } from "@constants/styles";
 import { Button } from "@components/ui/button";
+import ExpenseForm from "@components/expense-form";
+
+import { useManageExpenseScreen } from "./manage-expense.hook";
+
+import { NavigationProp } from "@react-navigation/native";
+import type { StackParams } from "@routes/stack/stack-navigation";
 
 export function ManageExpenseScreen() {
   const { isEditing, deleteExpenseHandler, cancelHandler, confirmHandler } =
@@ -23,6 +27,7 @@ export function ManageExpenseScreen() {
 
   return (
     <View style={styles.container}>
+      <ExpenseForm />
       <View style={styles.buttonsContainer}>
         <Button style={styles.button} mode="flat" onPress={cancelHandler}>
           Cancel
