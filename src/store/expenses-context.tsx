@@ -4,7 +4,7 @@ import { DUMMY_EXPENSES } from "@constants/dummy-data";
 
 import { ReducerActionsCases } from "./types";
 import type { ExpenseContextProps, ReducerActions } from "./types";
-import type { ExpensesProps } from "@components/expenses-output/types";
+import type { ExpensesProps } from "@typings/data";
 
 export const ExpensesContext = createContext<ExpenseContextProps>({
   expenses: [],

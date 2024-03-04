@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { ExpensesContext } from "@store/expenses.context";
+import { ExpensesContext } from "@store/expenses-context";
 
 import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import type { CompositeNavigationProp } from "@react-navigation/native";
