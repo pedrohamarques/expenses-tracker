@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { IconButton } from "@components/ui";
+import { Error, IconButton, Loading } from "@components/ui";
 import { GlobalStyles } from "@constants/styles";
 import ExpenseForm from "@components/expense-form";
 
@@ -15,6 +15,8 @@ export function ManageExpenseScreen() {
   const {
     expense,
     isEditing,
+    isSubmitting,
+    error,
     deleteExpenseHandler,
     cancelHandler,
     confirmHandler,
@@ -28,6 +30,14 @@ export function ManageExpenseScreen() {
       title: isEditing ? "Edit Expense" : "Add Expense",
     });
   }, [navigation, isEditing]);
+
+  if (isSubmitting) {
+    return <Loading />;
+  }
+
+  if (error && !isSubmitting) {
+    return <Error message={error} />;
+  }
 
   return (
     <View style={styles.container}>

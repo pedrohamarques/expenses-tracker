@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 
 import { ExpensesContext } from "@store/expenses-context";
@@ -18,6 +18,10 @@ export function useManageExpenseScreen() {
   const navigation =
     useNavigation<NavigationProp<StackParams, "ManageExpense">>();
 
+  const [error, setError] = useState<string | null>(null);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const { deleteExpense, expenses, updateExpense, addExpense } =
     useContext(ExpensesContext);
 
@@ -28,11 +32,17 @@ export function useManageExpenseScreen() {
   const isEditing = !!route.params.expenseId;
 
   async function deleteExpenseHandler() {
+    setIsSubmitting(true);
     if (expense && expenseId) {
-      await expenseDeleted(expenseId);
-      deleteExpense(expense);
+      try {
+        await expenseDeleted(expenseId);
+        deleteExpense(expense);
+        navigation.goBack();
+      } catch (error) {
+        setError("Could not delete expense - please try again later.");
+      }
     }
-    navigation.goBack();
+    setIsSubmitting(false);
   }
 
   function cancelHandler() {
@@ -40,14 +50,20 @@ export function useManageExpenseScreen() {
   }
 
   async function confirmHandler(expenseData: ExpenseDataProps) {
-    if (isEditing && expenseId) {
-      updateExpense({ ...expenseData, id: expenseId });
-      await expenseUpdated(expenseId, expenseData);
-    } else {
-      const id = await storeExpense(expenseData);
-      addExpense({ ...expenseData, id: id });
+    setIsSubmitting(true);
+    try {
+      if (isEditing && expenseId) {
+        updateExpense({ ...expenseData, id: expenseId });
+        await expenseUpdated(expenseId, expenseData);
+      } else {
+        const id = await storeExpense(expenseData);
+        addExpense({ ...expenseData, id: id });
+      }
+      navigation.goBack();
+    } catch (error) {
+      setError("Could not save data. Please try again later!");
     }
-    navigation.goBack();
+    setIsSubmitting(false);
   }
 
   return {
@@ -56,5 +72,7 @@ export function useManageExpenseScreen() {
     deleteExpenseHandler,
     cancelHandler,
     confirmHandler,
+    isSubmitting,
+    error,
   };
 }

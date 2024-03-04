@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import { getDayMinusDays } from "@utils/date";
@@ -19,6 +19,8 @@ export type ManageExpenseNavigationProp = CompositeNavigationProp<
 export function useRecentExpensesScreen() {
   const navigation = useNavigation<ManageExpenseNavigationProp>();
   const { expenses, setExpenses } = useContext(ExpensesContext);
+  const [isFetchingData, setIsFetchingData] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const recentExpenses = expenses.filter((expense) => {
     const today = new Date();
@@ -33,18 +35,26 @@ export function useRecentExpensesScreen() {
 
   useEffect(() => {
     async function getExpenses() {
-      const expenses = await fetchExpenses();
+      setIsFetchingData(true);
+      try {
+        const expenses = await fetchExpenses();
 
-      for (let i = 0; i < expenses.length; i++) {
-        setExpenses(expenses[i]);
+        for (let i = 0; i < expenses.length; i++) {
+          setExpenses(expenses[i]);
+        }
+      } catch (error) {
+        setError("Could not fetch expenses!");
       }
+      setIsFetchingData(false);
     }
 
     getExpenses();
-  }, [expenses]);
+  }, []);
 
   return {
     handleHeaderButtonPress,
     recentExpenses,
+    isFetchingData,
+    error,
   };
 }

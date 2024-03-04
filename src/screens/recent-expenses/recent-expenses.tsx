@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import { ExpensesOutput } from "@components/expenses-output";
-import { IconButton } from "@components/ui";
+import { Error, IconButton, Loading } from "@components/ui";
 
 import type { NavigationProp } from "@react-navigation/native";
 import type { BottomTabsParams } from "@routes/bottom/bottom-navigation";
@@ -13,7 +13,8 @@ export function RecentExpensesScreen() {
   const navigation =
     useNavigation<NavigationProp<BottomTabsParams, "RecentExpenses">>();
 
-  const { handleHeaderButtonPress, recentExpenses } = useRecentExpensesScreen();
+  const { handleHeaderButtonPress, recentExpenses, isFetchingData, error } =
+    useRecentExpensesScreen();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -27,6 +28,14 @@ export function RecentExpensesScreen() {
       ),
     });
   }, [navigation]);
+
+  if (isFetchingData) {
+    return <Loading />;
+  }
+
+  if (error && !isFetchingData) {
+    return <Error message={error} />;
+  }
 
   return (
     <ExpensesOutput
