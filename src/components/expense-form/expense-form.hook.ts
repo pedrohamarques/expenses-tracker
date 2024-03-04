@@ -14,13 +14,23 @@ export type ExpenseDataProps = {
 
 type UseExpenseFormProps = {
   onSubmit: ({ amount, date, description }: ExpenseDataProps) => void;
+  defaultValues?: ExpenseDataProps;
 };
 
-export function useExpenseForm({ onSubmit }: UseExpenseFormProps) {
+export function useExpenseForm({
+  onSubmit,
+  defaultValues,
+}: UseExpenseFormProps) {
+  const formattedDefaultValues = {
+    amount: defaultValues?.amount.toString(),
+    date: defaultValues?.date.toISOString().slice(0, 10),
+    description: defaultValues?.description,
+  };
+
   const [inputValues, setInputValues] = useState<InputValuesProps>({
-    amount: "",
-    date: "",
-    description: "",
+    amount: defaultValues ? formattedDefaultValues.amount! : "",
+    date: defaultValues ? formattedDefaultValues.date! : "",
+    description: defaultValues ? formattedDefaultValues.description! : "",
   });
 
   function inputChangeHandler(

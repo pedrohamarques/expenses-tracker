@@ -12,8 +12,13 @@ import { NavigationProp } from "@react-navigation/native";
 import type { StackParams } from "@routes/stack/stack-navigation";
 
 export function ManageExpenseScreen() {
-  const { isEditing, deleteExpenseHandler, cancelHandler, confirmHandler } =
-    useManageExpenseScreen();
+  const {
+    expense,
+    isEditing,
+    deleteExpenseHandler,
+    cancelHandler,
+    confirmHandler,
+  } = useManageExpenseScreen();
 
   const navigation =
     useNavigation<NavigationProp<StackParams, "ManageExpense">>();
@@ -30,6 +35,7 @@ export function ManageExpenseScreen() {
         isEditing={isEditing}
         onCancel={cancelHandler}
         onSubmit={confirmHandler}
+        defaultValues={expense}
       />
 
       {isEditing ? (

@@ -43,6 +43,7 @@ export function useManageExpenseScreen() {
 
   return {
     isEditing,
+    expense,
     deleteExpenseHandler,
     cancelHandler,
     confirmHandler,

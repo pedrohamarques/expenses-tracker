@@ -10,15 +10,18 @@ type ExpenseFormProps = {
   onCancel: () => void;
   onSubmit: ({ amount, date, description }: ExpenseDataProps) => void;
   isEditing: boolean;
+  defaultValues?: ExpenseDataProps;
 };
 
 export function ExpenseForm({
   onCancel,
   onSubmit,
   isEditing,
+  defaultValues,
 }: ExpenseFormProps) {
   const { inputChangeHandler, inputValues, submitHandler } = useExpenseForm({
     onSubmit,
+    defaultValues,
   });
 
   return (
