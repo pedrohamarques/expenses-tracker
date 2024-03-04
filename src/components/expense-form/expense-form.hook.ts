@@ -6,7 +6,17 @@ type InputValuesProps = {
   description: string;
 };
 
-export function useExpenseForm() {
+export type ExpenseDataProps = {
+  amount: number;
+  date: Date;
+  description: string;
+};
+
+type UseExpenseFormProps = {
+  onSubmit: ({ amount, date, description }: ExpenseDataProps) => void;
+};
+
+export function useExpenseForm({ onSubmit }: UseExpenseFormProps) {
   const [inputValues, setInputValues] = useState<InputValuesProps>({
     amount: "",
     date: "",
@@ -22,8 +32,19 @@ export function useExpenseForm() {
       [inputIdentifier]: enteredValue,
     }));
   }
+
+  function submitHandler() {
+    const expenseData = {
+      amount: Number(inputValues.amount),
+      date: new Date(inputValues.date),
+      description: inputValues.description,
+    };
+
+    onSubmit(expenseData);
+  }
   return {
     inputChangeHandler,
     inputValues,
+    submitHandler,
   };
 }
