@@ -1,7 +1,5 @@
 import React, { PropsWithChildren, createContext, useReducer } from "react";
 
-import { DUMMY_EXPENSES } from "@constants/dummy-data";
-
 import { ReducerActionsCases } from "./types";
 import type { ExpenseContextProps, ReducerActions } from "./types";
 import type { ExpensesProps } from "@typings/data";
@@ -11,6 +9,7 @@ export const ExpensesContext = createContext<ExpenseContextProps>({
   addExpense: () => {},
   deleteExpense: () => {},
   updateExpense: () => {},
+  setExpenses: () => {},
 });
 
 function expensesReducer(
@@ -33,32 +32,48 @@ function expensesReducer(
       return updatedExpenses;
     case "DELETE":
       return state.filter((expense) => expense.id !== action.payload.id);
+    case "SET":
+      const repetitiveIds = state.filter(
+        (expense) => action.payload.id === expense.id,
+      );
+
+      if (repetitiveIds.length === 0) {
+        return [...state, action.payload];
+      }
+      return state;
     default:
       return state;
   }
 }
 
 function ExpensesContextProvider({ children }: PropsWithChildren) {
-  const [expensesState, dispatch] = useReducer(expensesReducer, DUMMY_EXPENSES);
+  const [expensesState, dispatch] = useReducer(expensesReducer, []);
 
-  function addExpense({ description, amount, date, id }: ExpensesProps) {
+  function addExpense(expenseData: ExpensesProps) {
     dispatch({
       type: ReducerActionsCases.ADD,
-      payload: { amount, description, date, id },
+      payload: { ...expenseData },
     });
   }
 
-  function deleteExpense({ description, amount, date, id }: ExpensesProps) {
+  function deleteExpense(expenseData: ExpensesProps) {
     dispatch({
       type: ReducerActionsCases.DELETE,
-      payload: { amount, description, date, id },
+      payload: { ...expenseData },
     });
   }
 
-  function updateExpense({ description, amount, date, id }: ExpensesProps) {
+  function updateExpense(expenseData: ExpensesProps) {
     dispatch({
       type: ReducerActionsCases.UPDATE,
-      payload: { amount, description, date, id },
+      payload: { ...expenseData },
+    });
+  }
+
+  function setExpenses(expenseData: ExpensesProps) {
+    dispatch({
+      type: ReducerActionsCases.SET,
+      payload: { ...expenseData },
     });
   }
 
@@ -67,6 +82,7 @@ function ExpensesContextProvider({ children }: PropsWithChildren) {
     addExpense,
     deleteExpense,
     updateExpense,
+    setExpenses,
   };
 
   return (

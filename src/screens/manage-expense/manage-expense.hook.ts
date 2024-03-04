@@ -1,11 +1,17 @@
 import { useContext } from "react";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 
-import { ExpensesContext } from "@store/expenses.context";
+import { ExpensesContext } from "@store/expenses-context";
+
+import {
+  storeExpense,
+  updateExpense as expenseUpdated,
+  deleteExpense as expenseDeleted,
+} from "@services/http";
 
 import type { NavigationProp } from "@react-navigation/native";
 import type { StackParams } from "@routes/stack/stack-navigation";
-import type { ExpenseDataProps } from "./types";
+import type { ExpenseDataProps } from "@typings/data";
 
 export function useManageExpenseScreen() {
   const route = useRoute<RouteProp<StackParams, "ManageExpense">>();
@@ -21,8 +27,9 @@ export function useManageExpenseScreen() {
 
   const isEditing = !!route.params.expenseId;
 
-  function deleteExpenseHandler() {
-    if (expense) {
+  async function deleteExpenseHandler() {
+    if (expense && expenseId) {
+      await expenseDeleted(expenseId);
       deleteExpense(expense);
     }
     navigation.goBack();
@@ -32,11 +39,13 @@ export function useManageExpenseScreen() {
     navigation.goBack();
   }
 
-  function confirmHandler(expenseData: ExpenseDataProps) {
+  async function confirmHandler(expenseData: ExpenseDataProps) {
     if (isEditing && expenseId) {
       updateExpense({ ...expenseData, id: expenseId });
+      await expenseUpdated(expenseId, expenseData);
     } else {
-      addExpense({ ...expenseData, id: "" });
+      const id = await storeExpense(expenseData);
+      addExpense({ ...expenseData, id: id });
     }
     navigation.goBack();
   }
