@@ -1,9 +1,14 @@
 import { useState } from "react";
 
+type InputFieldProps = {
+  value: string;
+  isValid: boolean;
+};
+
 type InputValuesProps = {
-  amount: string;
-  date: string;
-  description: string;
+  amount: InputFieldProps;
+  date: InputFieldProps;
+  description: InputFieldProps;
 };
 
 export type ExpenseDataProps = {
@@ -28,28 +33,53 @@ export function useExpenseForm({
   };
 
   const [inputValues, setInputValues] = useState<InputValuesProps>({
-    amount: defaultValues ? formattedDefaultValues.amount! : "",
-    date: defaultValues ? formattedDefaultValues.date! : "",
-    description: defaultValues ? formattedDefaultValues.description! : "",
+    amount: {
+      value: defaultValues ? formattedDefaultValues.amount! : "",
+      isValid: true,
+    },
+    date: {
+      value: defaultValues ? formattedDefaultValues.date! : "",
+      isValid: true,
+    },
+    description: {
+      value: defaultValues ? formattedDefaultValues.description! : "",
+      isValid: true,
+    },
   });
 
   function inputChangeHandler(
     inputIdentifier: keyof InputValuesProps,
     enteredValue: string,
   ) {
-    setInputValues((currentValues) => ({
-      ...currentValues,
-      [inputIdentifier]: enteredValue,
+    setInputValues((currentInputs) => ({
+      ...currentInputs,
+      [inputIdentifier]: { value: enteredValue, isValid: true },
     }));
   }
 
   function submitHandler() {
     const expenseData = {
-      amount: Number(inputValues.amount),
-      date: new Date(inputValues.date),
-      description: inputValues.description,
+      amount: Number(inputValues.amount.value),
+      date: new Date(inputValues.date.value),
+      description: inputValues.description.value,
     };
 
+    const amountIsValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
+    const dateIsValid = expenseData.date.toString() !== "Invalid Date";
+    const descriptionIsValid = expenseData.description.trim().length > 0;
+
+    if (!amountIsValid || !dateIsValid || !descriptionIsValid) {
+      setInputValues((currentInputs) => ({
+        amount: { value: currentInputs.amount.value, isValid: amountIsValid },
+        date: { value: currentInputs.date.value, isValid: dateIsValid },
+        description: {
+          value: currentInputs.description.value,
+          isValid: descriptionIsValid,
+        },
+      }));
+
+      return;
+    }
     onSubmit(expenseData);
   }
   return {

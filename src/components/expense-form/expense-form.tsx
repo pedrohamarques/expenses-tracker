@@ -5,6 +5,7 @@ import { Button } from "@components/ui";
 
 import Input from "./components";
 import { ExpenseDataProps, useExpenseForm } from "./expense-form.hook";
+import { GlobalStyles } from "@constants/styles";
 
 type ExpenseFormProps = {
   onCancel: () => void;
@@ -24,6 +25,11 @@ export function ExpenseForm({
     defaultValues,
   });
 
+  const formIsInvalid =
+    !inputValues.amount.isValid ||
+    !inputValues.date.isValid ||
+    !inputValues.description.isValid;
+
   return (
     <View style={styles.form}>
       <Text style={styles.title}>Your Expense</Text>
@@ -33,7 +39,8 @@ export function ExpenseForm({
           keyboardType="decimal-pad"
           onChangeText={(text) => inputChangeHandler("amount", text)}
           style={styles.rowInput}
-          value={inputValues.amount}
+          value={inputValues.amount.value}
+          isValid={inputValues.amount.isValid}
         />
         <Input
           label="Date"
@@ -41,16 +48,23 @@ export function ExpenseForm({
           maxLength={10}
           onChangeText={(text) => inputChangeHandler("date", text)}
           style={styles.rowInput}
-          value={inputValues.date}
+          value={inputValues.date.value}
+          isValid={inputValues.date.isValid}
         />
       </View>
       <Input
         label="Description"
         multiline
-        value={inputValues.description}
+        value={inputValues.description.value}
         onChangeText={(text) => inputChangeHandler("description", text)}
+        isValid={inputValues.description.isValid}
       />
 
+      {formIsInvalid && (
+        <Text style={styles.errorText}>
+          Invalid input values. Please check your entered data!{" "}
+        </Text>
+      )}
       <View style={styles.buttonsContainer}>
         <Button style={styles.button} mode="flat" onPress={onCancel}>
           Cancel
@@ -89,5 +103,11 @@ const styles = StyleSheet.create({
   button: {
     minWidth: 120,
     marginHorizontal: 8,
+  },
+  errorText: {
+    textAlign: "center",
+    color: GlobalStyles.colors.error500,
+    margin: 8,
+    fontWeight: "bold",
   },
 });
