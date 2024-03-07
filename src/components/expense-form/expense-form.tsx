@@ -4,8 +4,10 @@ import { StyleSheet, Text, View } from "react-native";
 import { Button } from "@components/ui";
 
 import Input from "./components";
-import { ExpenseDataProps, useExpenseForm } from "./expense-form.hook";
+import { useExpenseForm } from "./expense-form.hook";
 import { GlobalStyles } from "@constants/styles";
+
+import type { ExpenseDataProps } from "@typings/data";
 
 type ExpenseFormProps = {
   onCancel: () => void;
@@ -41,6 +43,7 @@ export function ExpenseForm({
           style={styles.rowInput}
           value={inputValues.amount.value}
           isValid={inputValues.amount.isValid}
+          testID="amount"
         />
         <Input
           label="Date"

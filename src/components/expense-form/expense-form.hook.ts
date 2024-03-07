@@ -24,7 +24,7 @@ export function useExpenseForm({
 }: UseExpenseFormProps) {
   const formattedDefaultValues = {
     amount: defaultValues?.amount.toString(),
-    date: defaultValues?.date.toISOString().slice(0, 10),
+    date: defaultValues?.date ? defaultValues?.date.toISOString().slice(0, 10) : '',
     description: defaultValues?.description,
   };
 

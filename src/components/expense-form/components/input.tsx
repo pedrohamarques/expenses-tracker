@@ -15,6 +15,7 @@ export function Input({
   label,
   style,
   isValid,
+  testID = '',
   multiline = false,
   ...props
 }: InputProps) {
@@ -25,6 +26,7 @@ export function Input({
       </Text>
       <TextInput
         {...props}
+        testID={`components.expense-form.components.input.text-input.${testID}`}
         style={[
           styles.input,
           multiline && styles.inputMultiline,
