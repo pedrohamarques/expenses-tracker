@@ -13,12 +13,12 @@ const MONTHS = {
   December: 11,
 };
 
-function getMonthName(month: number) {
+export function getMonthName(month: number) {
   const keys = Object.keys(MONTHS);
   return keys[month];
 }
 
-function formatDate(date: string) {
+export function formatDate(date: string) {
   if (date.length === 1) {
     return "0" + date;
   }
@@ -27,6 +27,7 @@ function formatDate(date: string) {
 }
 
 export function getFormattedDate(date: Date) {
+  console.log(date);
   return `${formatDate(String(date.getDate()))} / ${getMonthName(date.getMonth())} / ${date.getFullYear()}`;
 }
 
