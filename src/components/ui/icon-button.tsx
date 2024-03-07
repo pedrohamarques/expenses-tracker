@@ -14,6 +14,7 @@ export function IconButton({ icon, size, color, onPress }: IconButtonProps) {
     <Pressable
       onPress={onPress}
       style={({ pressed }) => pressed && styles.pressed}
+      testID="components.ui.icon-button.pressable"
     >
       <View style={styles.buttonContainer}>
         <Ionicons name={icon} size={size} color={color} />

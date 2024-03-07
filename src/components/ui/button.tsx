@@ -24,7 +24,10 @@ export function Button({
         style={({ pressed }) => pressed && styles.pressed}
       >
         <View style={[styles.button, mode === "flat" && styles.flat]}>
-          <Text style={[styles.buttonText, mode === "flat" && styles.flatText]}>
+          <Text
+            style={[styles.buttonText, mode === "flat" && styles.flatText]}
+            testID="components.ui.button.text"
+          >
             {children}
           </Text>
         </View>
