@@ -12,7 +12,7 @@ export const ExpensesContext = createContext<ExpenseContextProps>({
   setExpenses: () => {},
 });
 
-function expensesReducer(
+export function expensesReducer(
   state: ExpensesProps[],
   action: ReducerActions,
 ): ExpensesProps[] {
