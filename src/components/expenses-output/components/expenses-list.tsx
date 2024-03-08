@@ -22,6 +22,7 @@ export function ExpensesList({ expenses }: ExpenseListProps) {
         />
       )}
       keyExtractor={(item) => item.id}
+      testID="components.expenses-output.components.expenses-list.flatlist"
     />
   );
 }

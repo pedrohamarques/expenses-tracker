@@ -20,6 +20,7 @@ export function ExpenseListItem({
     <Pressable
       onPress={expensePressHandler}
       style={({ pressed }) => pressed && styles.pressed}
+      testID="expenses-output.components.components.expense-list-item.pressable"
     >
       <View style={styles.expenseItem}>
         <View>
