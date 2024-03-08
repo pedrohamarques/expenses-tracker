@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react-native";
 
 import { ExpensesList } from "../expenses-list";
-import { DUMMY_DATA } from "../../__tests__/fixture";
+import { DUMMY_DATA } from "@constants/fixture";
 
 jest.mock("@react-navigation/native", () => ({
   useNavigation: jest.fn(),

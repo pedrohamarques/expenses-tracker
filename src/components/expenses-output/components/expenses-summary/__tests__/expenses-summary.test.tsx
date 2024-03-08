@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react-native";
 
 import { ExpensesSummary } from "../expenses-summary";
-import { DUMMY_DATA } from "../../../__tests__/fixture";
+import { DUMMY_DATA } from "@constants/fixture";
 
 const mockValues = {
   expenses: DUMMY_DATA,
