@@ -15,7 +15,7 @@ export function Input({
   label,
   style,
   isValid,
-  testID = '',
+  testID = "",
   multiline = false,
   ...props
 }: InputProps) {
