@@ -27,7 +27,6 @@ export function formatDate(date: string) {
 }
 
 export function getFormattedDate(date: Date) {
-  console.log(date);
   return `${formatDate(String(date.getDate()))} / ${getMonthName(date.getMonth())} / ${date.getFullYear()}`;
 }
 

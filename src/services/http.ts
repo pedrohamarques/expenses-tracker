@@ -2,7 +2,7 @@ import axios from "axios";
 
 import type { ExpenseDataProps } from "@typings/data";
 
-const firebaseApiUrl = process.env.EXPO_PUBLIC_FIREBASE_API_URL;
+export const firebaseApiUrl = process.env.EXPO_PUBLIC_FIREBASE_API_URL;
 
 export async function storeExpense(expenseData: ExpenseDataProps) {
   const response = await axios.post(
