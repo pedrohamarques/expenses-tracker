@@ -30,11 +30,11 @@ export function RecentExpensesScreen() {
   }, [navigation]);
 
   if (isFetchingData) {
-    return <Loading />;
+    return <Loading testID="screens.recent-expenses.loading" />;
   }
 
   if (error && !isFetchingData) {
-    return <Error message={error} />;
+    return <Error message={error} testID="screens.recent-expenses.error" />;
   }
 
   return (
