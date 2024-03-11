@@ -36,7 +36,7 @@ export function ManageExpenseScreen() {
   }
 
   if (error && !isSubmitting) {
-    return <Error message={error} />;
+    return <Error message={error} testID="screens.manage-expense.error" />;
   }
 
   return (
@@ -46,6 +46,7 @@ export function ManageExpenseScreen() {
         onCancel={cancelHandler}
         onSubmit={confirmHandler}
         defaultValues={expense}
+        testID="screens.manage-expense.expense-form"
       />
 
       {isEditing ? (
@@ -55,6 +56,7 @@ export function ManageExpenseScreen() {
             color={GlobalStyles.colors.error500}
             size={36}
             onPress={deleteExpenseHandler}
+            testID="screens.manage-expense.icon-button"
           />
         </View>
       ) : null}
