@@ -3,11 +3,7 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 
 import { ExpensesContext } from "@store/expenses-context";
 
-import {
-  storeExpense,
-  updateExpense as expenseUpdated,
-  deleteExpense as expenseDeleted,
-} from "@services/http";
+import { useHttpRequests } from "@services/http";
 
 import type { NavigationProp } from "@react-navigation/native";
 import type { StackParams } from "@routes/stack/stack-navigation";
@@ -24,6 +20,12 @@ export function useManageExpenseScreen() {
 
   const { deleteExpense, expenses, updateExpense, addExpense } =
     useContext(ExpensesContext);
+
+  const {
+    deleteExpense: expenseDeleted,
+    updateExpense: expenseUpdated,
+    storeExpense,
+  } = useHttpRequests();
 
   const { expenseId } = route.params;
 

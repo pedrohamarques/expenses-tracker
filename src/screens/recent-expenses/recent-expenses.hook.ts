@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import { getDayMinusDays } from "@utils/date";
-import { fetchExpenses } from "@services/http";
+import { useHttpRequests } from "@services/http";
 import { ExpensesContext } from "@store/expenses-context";
 
 import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
@@ -21,6 +21,7 @@ export function useRecentExpensesScreen() {
   const { expenses, setExpenses } = useContext(ExpensesContext);
   const [isFetchingData, setIsFetchingData] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { fetchExpenses } = useHttpRequests();
 
   const recentExpenses = expenses.filter((expense) => {
     const today = new Date();
