@@ -4,11 +4,12 @@ import { Text, StyleSheet, View } from "react-native";
 
 type ErrorProps = {
   message: string;
+  testID?: string;
 };
 
-export function Error({ message }: ErrorProps) {
+export function Error({ message, testID }: ErrorProps) {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={testID}>
       <Text style={[styles.text, styles.title]}>An error occurred!</Text>
       <Text style={styles.text}>{message}</Text>
     </View>

@@ -14,6 +14,7 @@ type ExpenseFormProps = {
   onSubmit: ({ amount, date, description }: ExpenseDataProps) => void;
   isEditing: boolean;
   defaultValues?: ExpenseDataProps;
+  testID?: string;
 };
 
 export function ExpenseForm({
@@ -21,6 +22,7 @@ export function ExpenseForm({
   onSubmit,
   isEditing,
   defaultValues,
+  testID,
 }: ExpenseFormProps) {
   const { inputChangeHandler, inputValues, submitHandler } = useExpenseForm({
     onSubmit,
@@ -33,7 +35,7 @@ export function ExpenseForm({
     !inputValues.description.isValid;
 
   return (
-    <View style={styles.form}>
+    <View style={styles.form} testID={testID}>
       <Text style={styles.title}>Your Expense</Text>
       <View style={styles.inputsRow}>
         <Input

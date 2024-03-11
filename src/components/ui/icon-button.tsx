@@ -7,14 +7,21 @@ type IconButtonProps = {
   color: string | undefined;
   size: number;
   onPress: () => void;
+  testID?: string;
 };
 
-export function IconButton({ icon, size, color, onPress }: IconButtonProps) {
+export function IconButton({
+  icon,
+  size,
+  color,
+  onPress,
+  testID = "components.ui.icon-button.pressable",
+}: IconButtonProps) {
   return (
     <Pressable
       onPress={onPress}
       style={({ pressed }) => pressed && styles.pressed}
-      testID="components.ui.icon-button.pressable"
+      testID={testID}
     >
       <View style={styles.buttonContainer}>
         <Ionicons name={icon} size={size} color={color} />
